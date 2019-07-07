@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getQuestionWithAns } from './../api/api'
-import './styles.scss'
+import './styles.css'
 
 class Index extends Component{
     constructor(props){
@@ -9,6 +9,7 @@ class Index extends Component{
             question: '',
             ansArr: [],
             finalOutput: [],
+            inProgress: true,
         }
         this.apiCaller = this.apiCaller.bind(this);
         this.handleAns = this.handleAns.bind(this);
@@ -34,18 +35,32 @@ class Index extends Component{
         if(id !== -1){
             this.apiCaller(id)
         }else{
+            this.setState({inProgress: false})
             console.log(this.state.finalOutput)
         }
     }
     render(){
-        const { question, ansArr } = this.state;
+        const { question, ansArr, inProgress, finalOutput } = this.state;
         return(
             <div className="main_banner">
-                <div>{question}</div>
                 {
-                    ansArr.map((ans,index) => {
-                        return <div key={index} onClick={() => this.handleAns(ans.ans, ans.next_q)}>{ans.ans}</div>
-                    })
+                    inProgress &&
+                    <div className="question_answer">
+                        <div>Question: {question}</div>
+                        <div className="answer">
+                            {
+                                ansArr.map((ans,index) => {
+                                    return <div className="" key={index} onClick={() => this.handleAns(ans.ans, ans.next_q)}>{index+1} : {ans.ans}</div>
+                                })
+                            }
+                        </div>
+                    </div>
+                }
+                {
+                    !inProgress &&
+                    <div>
+                        Good Bye!
+                    </div>  
                 }
             </div>
         )

@@ -11,7 +11,7 @@ def index(request):
     if request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        data = open('./dialogs.json').read()
+        data = open('./dialogues.json').read()
         jsonData = json.loads(data)
         return JsonResponse(jsonData[str(body['id'])], content_type='application/json')
     else:

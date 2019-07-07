@@ -1,0 +1,15 @@
+body{
+    height: 98vh;
+    background: #f7f7f757;
+}
+.main_banner{
+    font-size: 40px;
+    padding: 50px 20px;
+}
+.question_answer{
+    width: 600px;
+    margin: auto;
+}
+.answer{
+    cursor: pointer;
+}
