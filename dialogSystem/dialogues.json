@@ -170,5 +170,9 @@
                 "next_q": -1
             }
         ]
-    } 
+    },
+    "99": {
+        "question": "Good Bye!",
+        "answer": []
+    }
 }

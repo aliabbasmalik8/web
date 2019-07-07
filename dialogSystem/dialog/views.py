@@ -11,8 +11,15 @@ def index(request):
     if request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
+        id = str(body['id'])
+        if id == '-1':
+            final_output = ''
+            for item in body['finalOutput']:
+                final_output = final_output + item + ' -> '
+            print(final_output)
+            id = '99'
         data = open('./dialogues.json').read()
         jsonData = json.loads(data)
-        return JsonResponse(jsonData[str(body['id'])], content_type='application/json')
+        return JsonResponse(jsonData[id], content_type='application/json')
     else:
-        return HttpResponse("Hello, world. You're at the polls index.")
+        return HttpResponse("Hello world.")

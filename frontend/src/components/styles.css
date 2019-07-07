@@ -13,3 +13,6 @@ body{
 .answer{
     cursor: pointer;
 }
+.good_bye{
+    text-align: center;
+}

@@ -15,10 +15,13 @@ class Index extends Component{
         this.handleAns = this.handleAns.bind(this);
     }
     componentDidMount(){
-        this.apiCaller(1);
+        this.apiCaller(1, []);
     }
-    apiCaller(id){
-        const data = { id: id }
+    apiCaller(id, finalOutput){
+        const data = { 
+            id: id,
+            finalOutput: finalOutput
+        }
         let newFinalOutput = this.state.finalOutput;
         getQuestionWithAns(data)
         .then((res) => {
@@ -33,10 +36,10 @@ class Index extends Component{
     handleAns(ans, id){
         this.setState({finalOutput: this.state.finalOutput.push(ans)})
         if(id !== -1){
-            this.apiCaller(id)
+            this.apiCaller(id, this.state.finalOutput)
         }else{
+            this.apiCaller(id, this.state.finalOutput)
             this.setState({inProgress: false})
-            console.log(this.state.finalOutput)
         }
     }
     render(){
@@ -58,7 +61,7 @@ class Index extends Component{
                 }
                 {
                     !inProgress &&
-                    <div>
+                    <div className="good_bye">
                         Good Bye!
                     </div>  
                 }
